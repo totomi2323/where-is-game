@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Header.css"
 
 const Header = () => {
+    const [counter, setCounter] = useState(0)
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setCounter(counter+1)
+        },1000)
+    },[counter])
+    
   return (
     <header>
       <ul>
-        <li>Time:</li>
+        <li>Time: {counter}</li>
         <li>
           <ul className="nameList">
             <li>Itachi</li>
