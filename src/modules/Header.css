@@ -1,0 +1,18 @@
+ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.nameList {
+    display: flex;
+    flex-direction: column;
+}
+header {
+    background-color: grey;
+    padding: 5px;
+    width: 98%;
+    border: 1px solid black;
+    box-shadow: 2px 2px;
+    margin: 0 5px;
+}
