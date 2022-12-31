@@ -3,23 +3,22 @@ import "./styles/Dropdown.css";
 
 const Dropdown = () => {
   const [selected, setSelected] = useState("Nothing selected");
-  const [dropPositionX, setDropPositionX] = useState(100);
-  const [dropPositionY, setDropPositionY] = useState(100);
+  const [dropPositionX, setDropPositionX] = useState(0);
+  const [dropPositionY, setDropPositionY] = useState(0);
   const [dropDisplay, setDropDisplay] = useState("none");
 
   useEffect(() => {
     function openDropDown(e) {
-      console.log("vas");
-      console.log(e);
       setDropPositionX(e.clientX - 20 + "px");
       setDropPositionY(e.clientY - 20 + "px");
-      console.log(dropPositionX);
       setDropDisplay("block");
     }
-    document.addEventListener("click", openDropDown);
+
+    let picture = document.querySelector(".picture")
+    picture.addEventListener("click", openDropDown);
 
     return () => {
-      document.removeEventListener("click", openDropDown);
+      picture.removeEventListener("click", openDropDown);
     };
   }, [dropPositionX, dropPositionY]);
   return (

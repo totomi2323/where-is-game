@@ -9,10 +9,10 @@ ul {
     flex-direction: column;
 }
 header {
+    display: block;
     background-color: grey;
-    padding: 5px;
-    width: 98%;
+    width: 100%;
     border: 1px solid black;
-    box-shadow: 2px 2px;
-    margin: 0 5px;
+    box-shadow: 0 2px;
+    margin: 0 -2px;
 }
