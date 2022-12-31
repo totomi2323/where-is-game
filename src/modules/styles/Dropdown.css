@@ -1,0 +1,9 @@
+.dropContainer {
+    position:absolute;
+    background-color: grey;
+    padding: 5px;
+    border: 1px solid black;
+    box-shadow: 2px 2px;
+    opacity: 0.8;
+    border-radius: 10px;
+}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Header.css"
+import "./styles/Header.css"
 
 const Header = () => {
     const [counter, setCounter] = useState(0)
