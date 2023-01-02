@@ -1,9 +1,21 @@
 .dropContainer {
     position:absolute;
     background-color: grey;
-    padding: 5px;
     border: 1px solid black;
     box-shadow: 2px 2px;
-    opacity: 0.8;
+    opacity: 0.85;
     border-radius: 10px;
+   
+}
+.nameList {
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+}
+.nameList li:hover{
+    background-color:  darkgray ;
+}
+
+.nameList li{
+    padding: 3px;
 }

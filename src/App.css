@@ -3,20 +3,19 @@
 }
 body {
   margin:0;
-}
-.element { 
-  display: block;
-  position: absolute;
- 
-  background-color: black;
-  opacity: 0.5;
-}
-.picture{
-  background: url("./naruto.jpg") ;
+  background: url("./naruto.jpg")  no-repeat center center fixed; ;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+.element { 
+  display: block;
+  position: absolute;
+  background-color: black;
+  opacity: 0.5;
+}
+.picture{
   display: block;
   position: absolute;  height: 83%;
   margin: 0;

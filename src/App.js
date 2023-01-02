@@ -8,31 +8,44 @@ const App = () => {
     left: 0,
     right: 0,
   });
-  const [garaaPosition, setGaraaPosition] = useState({ 
-    left: 0, 
-    right: 0});
-  const [sasukePosition, setSasukePosition] = useState({ 
-    left: 0, 
-    right: 0});
-  const [topPosition, setTopPoisition] = useState();
-  const [bottomPosition, setBottomPosition] = useState();
+  const [garaaPosition, setGaraaPosition] = useState({
+    left: 0,
+    right: 0,
+  });
+  const [sasukePosition, setSasukePosition] = useState({
+    left: 0,
+    right: 0,
+  });
+  const [topPosition, setTopPoisition] = useState(0);
+  const [bottomPosition, setBottomPosition] = useState(0);
 
   useEffect(() => {
     let picture = document.querySelector(".picture");
     console.log(
       "width:" + picture.clientWidth + " height: " + picture.clientHeight
     );
-    let itachiPos = picture.clientWidth * 0.78;
-    let top = picture.clientHeight * 0.5;
-    let bottom = picture.clientHeight * 0.99;
-    let sasukePosition = setTopPoisition(top);
-    setBottomPosition(bottom);
-    setItachiPosition({
-      left: itachiPos,
-      right: itachiPos + picture.clientWidth * 0.12,
+
+    let garaaPositionLeft= picture.clientWidth * 0.01;
+    setGaraaPosition({
+      left: garaaPositionLeft,
+      right: garaaPositionLeft + picture.clientWidth * 0.12,
     });
-    console.log(topPosition);
-    console.log(bottom);
+
+    let top = picture.clientHeight * 0.3;
+    let bottom = picture.clientHeight * 0.95;
+    setTopPoisition(top);
+    setBottomPosition(bottom);
+
+    let itachiPosLeft = picture.clientWidth * 0.78;
+    setItachiPosition({
+      left: itachiPosLeft,
+      right: itachiPosLeft + picture.clientWidth * 0.12,
+    });
+    let sasukePositionLeft = picture.clientWidth * 0.32;
+    setSasukePosition({
+      left: sasukePositionLeft,
+      right: sasukePositionLeft + picture.clientWidth * 0.12,
+    });
     return () => {};
   }, []);
 
@@ -40,13 +53,20 @@ const App = () => {
     <div className="App">
       <Header />
       <div className="picture"></div>
-      <Dropdown />
+      <Dropdown
+        itachi={itachiPosition}
+        sasuke={sasukePosition}
+        garaa={garaaPosition}
+        top={topPosition}
+        bottom={bottomPosition}
+      />
       <div
         className="element"
         style={{
-          left: itachiPosition.left,
+          display:"none",
+          left: garaaPosition.left,
           top: topPosition,
-          width: itachiPosition.right - itachiPosition.left,
+          width: garaaPosition.right - garaaPosition.left,
           height: bottomPosition - topPosition,
         }}
       ></div>
