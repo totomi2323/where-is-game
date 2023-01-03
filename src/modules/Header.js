@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./styles/Header.css"
 
-const Header = () => {
+const NavBar = () => {
     const [counter, setCounter] = useState(0)
 
     useEffect(() => {
@@ -21,10 +21,11 @@ const Header = () => {
             <li>Garaa</li>
           </ul>
         </li>
+        <li>Scores</li>
         <li>Login</li>
       </ul>
     </header>
   );
 };
 
-export default Header;
+export default NavBar;

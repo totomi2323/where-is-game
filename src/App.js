@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import Header from "./modules/Header";
 import Dropdown from "./modules/Dropdown";
+import NavBar from "./modules/Header";
+
 
 const App = () => {
   const [itachiPosition, setItachiPosition] = useState({
@@ -51,7 +52,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <Header />
+      <NavBar />
       <div className="picture"></div>
       <Dropdown
         itachi={itachiPosition}
