@@ -15,7 +15,7 @@ const Header = () => {
       <ul>
         <li>Time: {counter}</li>
         <li>
-          <ul className="nameList">
+          <ul className="foundList">
             <li>Itachi</li>
             <li>Sasuke</li>
             <li>Garaa</li>

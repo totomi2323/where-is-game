@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import characterFound from "../functions/characterFound.js";
+import checkCharacter from "../functions/checkCharacterOnPosition.js";
 import "./styles/Dropdown.css";
 
 const Dropdown = (props) => {
@@ -24,47 +26,42 @@ const Dropdown = (props) => {
     };
   }, [dropPositionX, dropPositionY]);
 
-  const checkPosition = (character) => {
-   
-    switch(character) {
-      case "Itachi" :
-        if (
-          dropPositionX >= itachi.left &&
-          dropPositionX <= itachi.right &&
-          dropPositionY >= top &&
-          dropPositionY <= bottom
-        ) {
-          console.log("found itachi");
-        }
-      break;
-      case "Sasuke" :
-        if (
-          dropPositionX >= sasuke.left &&
-          dropPositionX <= sasuke.right &&
-          dropPositionY >= top &&
-          dropPositionY <= bottom
-        ) {
-          console.log("found sasuke");
-        }
+  const checkValidPosition = (character) => {
+    let left;
+    let right;
+    switch (character) {
+      case "Itachi":
+        left = itachi.left;
+        right = itachi.right;
         break;
-        case "Garaa" :
-          if (
-            dropPositionX >= garaa.left &&
-            dropPositionX <= garaa.right &&
-            dropPositionY >= top &&
-            dropPositionY <= bottom
-          ) {
-            console.log("found garaa");
-          }
-          break;
+      case "Sasuke":
+        left = sasuke.left;
+        right = sasuke.right;
+        break;
+      case "Garaa":
+        left = garaa.left;
+        right = garaa.right;
+        break;
+      default:
+        console.log("No character selected");
     }
-    
+   if (checkCharacter(
+      character,
+      left,
+      right,
+      top,
+      bottom,
+      dropPositionX,
+      dropPositionY
+    )) { characterFound(character)} else {
+      console.log("keep looking around")
+    };
   };
 
   const choosenCharacter = (e) => {
     setSelected(e.target.innerHTML);
     setDropDisplay("none");
-    checkPosition(e.target.innerHTML);
+    checkValidPosition(e.target.innerHTML);
   };
   return (
     <div
