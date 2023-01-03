@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import Dropdown from "./modules/Dropdown";
-import NavBar from "./modules/Header";
-
+import NavBar from "./modules/NavBar.js";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Scores from "./modules/Scores";
 
 const App = () => {
   const [itachiPosition, setItachiPosition] = useState({
@@ -32,8 +33,8 @@ const App = () => {
       right: garaaPositionLeft + picture.clientWidth * 0.12,
     });
 
-    let top = picture.clientHeight * 0.3;
-    let bottom = picture.clientHeight * 0.95;
+    let top = picture.clientHeight * 0.35;
+    let bottom = picture.clientHeight * 0.90;
     setTopPoisition(top);
     setBottomPosition(bottom);
 
@@ -61,16 +62,8 @@ const App = () => {
         top={topPosition}
         bottom={bottomPosition}
       />
-      <div
-        className="element"
-        style={{
-          display:"none",
-          left: garaaPosition.left,
-          top: topPosition,
-          width: garaaPosition.right - garaaPosition.left,
-          height: bottomPosition - topPosition,
-        }}
-      ></div>
+      <Scores />
+
     </div>
   );
 };

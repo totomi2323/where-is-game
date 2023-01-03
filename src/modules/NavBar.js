@@ -10,6 +10,9 @@ const NavBar = () => {
         },1000)
     },[counter])
     
+    const openScores = () => {
+      document.querySelector(".scores").style.display="block"
+    }
   return (
     <header>
       <ul>
@@ -21,7 +24,7 @@ const NavBar = () => {
             <li>Garaa</li>
           </ul>
         </li>
-        <li>Scores</li>
+        <li onClick={openScores}>Scores</li>
         <li>Login</li>
       </ul>
     </header>
