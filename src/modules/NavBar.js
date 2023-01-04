@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from "react";
-import "./styles/Header.css"
+import Scores from "./Scores";
+import "./styles/NavBar.css"
 
-const NavBar = () => {
-    const [counter, setCounter] = useState(0)
+const NavBar = (props) => {
+  
+    const {stopTimer,setOpenScores} = props;
+    const [counter, setCounter] = useState(0);
 
+    
     useEffect(() => {
         const timer = setTimeout(() => {
             setCounter(counter+1)
         },1000)
-    },[counter])
+          if (stopTimer) {clearTimeout(timer)}
+      
+    },[counter]);
     
-    const openScores = () => {
-      document.querySelector(".scores").style.display="block"
-    }
   return (
-    <header>
+    <nav>
       <ul>
         <li>Time: {counter}</li>
         <li>
@@ -24,10 +27,10 @@ const NavBar = () => {
             <li>Garaa</li>
           </ul>
         </li>
-        <li onClick={openScores}>Scores</li>
+        <li onClick={()=>{setOpenScores(true)}}>Scores</li>
         <li>Login</li>
       </ul>
-    </header>
+    </nav>
   );
 };
 

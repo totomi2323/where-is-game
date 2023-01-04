@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./styles/Scores.css";
 import uniqid from "uniqid";
-const Scores = () => {
+const Scores = (props) => {
+  const { setSubmitted, setGameOver, setOpenScores } = props;
   const [scores, setScores] = useState([
-    { name: "Tamas", time: "1:11", date: "03-01-2023" ,key:uniqid()},
+    { name: "Tamas", time: "1:11", date: "03-01-2023", key: uniqid() },
   ]);
-  const closeScoresTab = () => {
-        document.querySelector(".scores").style.display="none"
-  }
+
   return (
-    <div className="scores" style={{display:"none"}}>
+    <div className="scores">
       <ul className="scoresList">
         <li key={uniqid()}>
           <span>Name</span>
@@ -26,7 +25,18 @@ const Scores = () => {
           );
         })}
       </ul>
-      <button onClick={closeScoresTab}>Close</button>
+      <button
+        onClick={() => {
+          if (setSubmitted && setGameOver) {
+            setSubmitted(false);
+            setGameOver(false);
+          } else {
+            setOpenScores(false);
+          }
+        }}
+      >
+        Close
+      </button>
     </div>
   );
 };

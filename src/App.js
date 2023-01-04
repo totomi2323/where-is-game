@@ -4,6 +4,7 @@ import Dropdown from "./modules/Dropdown";
 import NavBar from "./modules/NavBar.js";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Scores from "./modules/Scores";
+import GameOver from "./modules/GameOver";
 
 const App = () => {
   const [itachiPosition, setItachiPosition] = useState({
@@ -20,6 +21,10 @@ const App = () => {
   });
   const [topPosition, setTopPoisition] = useState(0);
   const [bottomPosition, setBottomPosition] = useState(0);
+  const [foundCharacters, setFoundCharacters] = useState(0);
+  const [stopTimer, setStopTimer] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
+  const [openScores, setOpenScores] = useState(false)
 
   useEffect(() => {
     let picture = document.querySelector(".picture");
@@ -27,14 +32,14 @@ const App = () => {
       "width:" + picture.clientWidth + " height: " + picture.clientHeight
     );
 
-    let garaaPositionLeft= picture.clientWidth * 0.01;
+    let garaaPositionLeft = picture.clientWidth * 0.01;
     setGaraaPosition({
       left: garaaPositionLeft,
       right: garaaPositionLeft + picture.clientWidth * 0.12,
     });
 
     let top = picture.clientHeight * 0.35;
-    let bottom = picture.clientHeight * 0.90;
+    let bottom = picture.clientHeight * 0.9;
     setTopPoisition(top);
     setBottomPosition(bottom);
 
@@ -51,9 +56,22 @@ const App = () => {
     return () => {};
   }, []);
 
+  const checkAllFound = () => {
+    setFoundCharacters((foundCharacters) => {
+      const newValue = foundCharacters + 1;
+      if (newValue === 3) {
+        console.log("Game Over");
+        setStopTimer(true);
+        setGameOver(true)
+      } 
+      return newValue;
+    });
+  };
+  
+
   return (
     <div className="App">
-      <NavBar />
+      <NavBar stopTimer={stopTimer} setOpenScores={setOpenScores}/>
       <div className="picture"></div>
       <Dropdown
         itachi={itachiPosition}
@@ -61,9 +79,10 @@ const App = () => {
         garaa={garaaPosition}
         top={topPosition}
         bottom={bottomPosition}
+        checkAllFound={checkAllFound}
       />
-      <Scores />
-
+      {gameOver && <GameOver setGameOver={setGameOver} />}
+      {openScores && <Scores setOpenScores={setOpenScores}/>}
     </div>
   );
 };

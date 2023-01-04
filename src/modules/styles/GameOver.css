@@ -1,0 +1,12 @@
+form{ 
+    display: block;
+    position: absolute;
+    opacity: 0.95;
+    top: 30%;
+    left:35%;
+    width:30% ;
+    height: 60%;
+    background-color: darkslategray;
+    border: 1px solid black;
+    box-shadow: 2px 2px;
+}

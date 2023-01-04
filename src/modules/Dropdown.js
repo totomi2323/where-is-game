@@ -4,11 +4,11 @@ import checkCharacter from "../functions/checkCharacterOnPosition.js";
 import "./styles/Dropdown.css";
 
 const Dropdown = (props) => {
-  const { itachi, sasuke, garaa, top, bottom } = props;
-  const [selected, setSelected] = useState("Itachi");
+  const { itachi, sasuke, garaa, top, bottom, checkAllFound } = props;
   const [dropPositionX, setDropPositionX] = useState(0);
   const [dropPositionY, setDropPositionY] = useState(0);
   const [dropDisplay, setDropDisplay] = useState("none");
+  
 
   useEffect(() => {
     function openDropDown(e) {
@@ -53,13 +53,14 @@ const Dropdown = (props) => {
       bottom,
       dropPositionX,
       dropPositionY
-    )) { characterFound(character)} else {
+    )) { characterFound(character)
+      checkAllFound();
+        } else {
       console.log("keep looking around")
     };
   };
 
   const choosenCharacter = (e) => {
-    setSelected(e.target.innerHTML);
     setDropDisplay("none");
     checkValidPosition(e.target.innerHTML);
   };
