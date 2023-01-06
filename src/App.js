@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Scores from "./modules/Scores";
 import GameOver from "./modules/GameOver";
 
+
 const App = () => {
   const [itachiPosition, setItachiPosition] = useState({
     left: 0,
@@ -81,7 +82,7 @@ const App = () => {
         bottom={bottomPosition}
         checkAllFound={checkAllFound}
       />
-      {gameOver && <GameOver setGameOver={setGameOver} />}
+      {gameOver && <GameOver setGameOver={setGameOver} setOpenScores={setOpenScores}/>}
       {openScores && <Scores setOpenScores={setOpenScores}/>}
     </div>
   );

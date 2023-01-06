@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./styles/GameOver.css";
-import Scores from "./Scores";
 
 const GameOver = (props) => {
-  const { setGameOver } = props;
-  const [submitted, setSubmitted] = useState(false);
+  const {setGameOver,setOpenScores } = props;
+  
 
   return (
     <div>
@@ -17,14 +16,13 @@ const GameOver = (props) => {
           type="submit"
           value="Submit"
           onClick={(e) => {
-            setSubmitted(true);
+            setGameOver(false);
+            setOpenScores(true);
             e.preventDefault();
           }}
         ></input>
       </form>
-      {submitted && (
-        <Scores setSubmitted={setSubmitted} setGameOver={setGameOver} />
-      )}
+     
     </div>
   );
 };
