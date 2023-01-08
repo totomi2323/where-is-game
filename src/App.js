@@ -6,7 +6,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Scores from "./modules/Scores";
 import GameOver from "./modules/GameOver";
 
-
 const App = () => {
   const [itachiPosition, setItachiPosition] = useState({
     left: 0,
@@ -25,7 +24,9 @@ const App = () => {
   const [foundCharacters, setFoundCharacters] = useState(0);
   const [stopTimer, setStopTimer] = useState(false);
   const [gameOver, setGameOver] = useState(false);
-  const [openScores, setOpenScores] = useState(false)
+  const [openScores, setOpenScores] = useState(false);
+  const [counter, setCounter] = useState(0);
+  const [time, setTime] = useState();
 
   useEffect(() => {
     let picture = document.querySelector(".picture");
@@ -57,22 +58,43 @@ const App = () => {
     return () => {};
   }, []);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCounter(counter + 1);
+    }, 1000);
+    if (stopTimer) {
+      clearTimeout(timer);
+    }
+    const counterToTime = () => {
+      let minute = Math.floor(counter/60);
+      let second = counter -(minute *60);
+  
+      const defTime = minute+":"+second;
+      setTime(defTime)
+      console.log(time)
+    }
+    counterToTime()
+  }, [counter, time]);
+
+  
+
+
+
   const checkAllFound = () => {
     setFoundCharacters((foundCharacters) => {
       const newValue = foundCharacters + 1;
       if (newValue === 3) {
         console.log("Game Over");
         setStopTimer(true);
-        setGameOver(true)
-      } 
+        setGameOver(true);
+      }
       return newValue;
     });
   };
-  
 
   return (
     <div className="App">
-      <NavBar stopTimer={stopTimer} setOpenScores={setOpenScores}/>
+      <NavBar stopTimer={stopTimer} setOpenScores={setOpenScores} time={time}/>
       <div className="picture"></div>
       <Dropdown
         itachi={itachiPosition}
@@ -82,8 +104,10 @@ const App = () => {
         bottom={bottomPosition}
         checkAllFound={checkAllFound}
       />
-      {gameOver && <GameOver setGameOver={setGameOver} setOpenScores={setOpenScores}/>}
-      {openScores && <Scores setOpenScores={setOpenScores}/>}
+      {gameOver && (
+        <GameOver setGameOver={setGameOver} setOpenScores={setOpenScores} time={time}/>
+      )}
+      {openScores && <Scores setOpenScores={setOpenScores} />}
     </div>
   );
 };

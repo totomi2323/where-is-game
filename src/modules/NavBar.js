@@ -4,29 +4,13 @@ import "./styles/NavBar.css"
 
 const NavBar = (props) => {
   
-    const {stopTimer,setOpenScores} = props;
-    const [counter, setCounter] = useState(0);
-
+    const {setOpenScores,time} = props;
     
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setCounter(counter+1)
-        },1000)
-          if (stopTimer) {clearTimeout(timer)}
-      
-    },[counter]);
-    
+   
   return (
     <nav>
       <ul>
-        <li>Time: {counter}</li>
-        <li>
-          <ul className="foundList">
-            <li>Itachi</li>
-            <li>Sasuke</li>
-            <li>Garaa</li>
-          </ul>
-        </li>
+        <li>Time: {time}</li>
         <li onClick={()=>{setOpenScores(true)}}>Scores</li>
         <li>Login</li>
       </ul>

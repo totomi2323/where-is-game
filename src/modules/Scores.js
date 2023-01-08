@@ -3,15 +3,13 @@ import "./styles/Scores.css";
 import uniqid from "uniqid";
 import { getFirebaseConfig } from "../firebase-config.js";
 import { initializeApp } from "firebase/app";
-import {addDoc, collection, getFirestore,onSnapshot, query, docChanges, snapshotEqual, doc} from "firebase/firestore"
+import {collection, getFirestore,onSnapshot, query, docChanges, snapshotEqual, doc} from "firebase/firestore"
 
 const Scores = (props) => {
   const { setSubmitted, setGameOver, setOpenScores } = props;
   const [scores, setScores] = useState([
 
   ]);
-
-
 
   const firebaseAppConfig = getFirebaseConfig();
   const app = initializeApp(firebaseAppConfig);
@@ -33,20 +31,9 @@ const Scores = (props) => {
         }
       });
     })
-    console.log(scores)
     },[])
 
 
-  async function saveMessage(messageText) {
-    try {
-      await addDoc(collection(getFirestore(), 'messages'), {
-        text: messageText,
-      });
-    }
-    catch(error) {
-      console.error('Error writing new message to Firebase Database', error);
-    }
-  }
 
   return (
     <div className="scores">
