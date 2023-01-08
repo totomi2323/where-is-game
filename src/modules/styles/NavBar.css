@@ -4,10 +4,6 @@ ul {
     justify-content: space-around;
     align-items: center;
 }
-.foundList {
-    display: flex;
-    flex-direction: column;
-}
 nav {
     display: block;
     background-color: grey;

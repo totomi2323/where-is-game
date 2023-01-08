@@ -4,11 +4,16 @@
     opacity: 0.95;
     top: 20%;
     left:35%;
-    width:30% ;
-    height: 50%;
+    width:35% ;
+    height: 60%;
     background-color: darkslategray;
     border: 1px solid black;
     box-shadow: 2px 2px;
+    overflow-y: scroll;
+    
+}
+.highlight {
+    font-weight: bolder;
 }
 .scoresList{
     display: flex;
@@ -16,6 +21,7 @@
     padding: 10px;
     margin: 2px 0;
     text-align: center;
+    
 }
 
 .scoresList li {

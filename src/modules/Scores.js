@@ -3,42 +3,43 @@ import "./styles/Scores.css";
 import uniqid from "uniqid";
 import { getFirebaseConfig } from "../firebase-config.js";
 import { initializeApp } from "firebase/app";
-import {collection, getFirestore,onSnapshot, query, docChanges, snapshotEqual, doc} from "firebase/firestore"
+import {
+  collection,
+  getFirestore,
+  onSnapshot,
+  query,
+  orderBy
+} from "firebase/firestore";
 
 const Scores = (props) => {
-  const { setSubmitted, setGameOver, setOpenScores } = props;
-  const [scores, setScores] = useState([
-
-  ]);
+  const { setOpenScores } = props;
+  const [scores, setScores] = useState([]);
 
   const firebaseAppConfig = getFirebaseConfig();
   const app = initializeApp(firebaseAppConfig);
 
   useEffect(() => {
-    const recentScoreQuery = query(collection(getFirestore(), "scores"))
-    
-    onSnapshot(recentScoreQuery, function(snapshot) {
-      snapshot.docChanges().forEach(function(change) {
-        if (change.type === 'removed') {
+    const recentScoreQuery = query(collection(getFirestore(), "scores"), orderBy("time", "asc"));
+
+    onSnapshot(recentScoreQuery, function (snapshot) {
+      snapshot.docChanges().forEach(function (change) {
+        if (change.type === "removed") {
         } else {
           let data = change.doc.data();
-          console.log(data)
 
           setScores((prevState) => ({
             ...prevState,
             [data.key]: data,
-          }))
+          }));
         }
       });
-    })
-    },[])
-
-
+    });
+  }, [scores]);
 
   return (
     <div className="scores">
       <ul className="scoresList">
-        <li key={uniqid()}>
+        <li key={uniqid()} className="highlight">
           <span>Name</span>
           <span>Time</span>
           <span>Date</span>
@@ -55,12 +56,7 @@ const Scores = (props) => {
       </ul>
       <button
         onClick={() => {
-          if (setSubmitted && setGameOver) {
-            setSubmitted(false);
-            setGameOver(false);
-          } else {
-            setOpenScores(false);
-          }
+          setOpenScores(false);
         }}
       >
         Close

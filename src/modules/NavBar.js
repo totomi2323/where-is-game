@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import Scores from "./Scores";
+import React from "react";
 import "./styles/NavBar.css"
 
 const NavBar = (props) => {
@@ -12,7 +11,6 @@ const NavBar = (props) => {
       <ul>
         <li>Time: {time}</li>
         <li onClick={()=>{setOpenScores(true)}}>Scores</li>
-        <li>Login</li>
       </ul>
     </nav>
   );

@@ -4,27 +4,29 @@ import checkCharacter from "../functions/checkCharacterOnPosition.js";
 import "./styles/Dropdown.css";
 
 const Dropdown = (props) => {
-  const { itachi, sasuke, garaa, top, bottom, checkAllFound } = props;
+  const { itachi, sasuke, garaa, top, bottom, checkAllFound, stopTimer } =
+    props;
   const [dropPositionX, setDropPositionX] = useState(0);
   const [dropPositionY, setDropPositionY] = useState(0);
   const [dropDisplay, setDropDisplay] = useState("none");
-  
 
   useEffect(() => {
     function openDropDown(e) {
       setDropPositionX(e.clientX);
       setDropPositionY(e.clientY);
       setDropDisplay("block");
-      console.log(e.clientX, e.clientY);
     }
 
     let picture = document.querySelector(".picture");
-    picture.addEventListener("click", openDropDown);
+    if (!stopTimer) {
+      picture.addEventListener("click", openDropDown);
+    }
+   
 
     return () => {
       picture.removeEventListener("click", openDropDown);
     };
-  }, [dropPositionX, dropPositionY]);
+  }, [dropPositionX, dropPositionY, dropDisplay,stopTimer]);
 
   const checkValidPosition = (character) => {
     let left;
@@ -45,19 +47,22 @@ const Dropdown = (props) => {
       default:
         console.log("No character selected");
     }
-   if (checkCharacter(
-      character,
-      left,
-      right,
-      top,
-      bottom,
-      dropPositionX,
-      dropPositionY
-    )) { characterFound(character)
+    if (
+      checkCharacter(
+        character,
+        left,
+        right,
+        top,
+        bottom,
+        dropPositionX,
+        dropPositionY
+      )
+    ) {
+      characterFound(character);
       checkAllFound();
-        } else {
-      console.log("keep looking around")
-    };
+    } else {
+      console.log("keep looking around");
+    }
   };
 
   const choosenCharacter = (e) => {

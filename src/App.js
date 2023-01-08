@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import Dropdown from "./modules/Dropdown";
 import NavBar from "./modules/NavBar.js";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Scores from "./modules/Scores";
 import GameOver from "./modules/GameOver";
 
@@ -30,9 +29,6 @@ const App = () => {
 
   useEffect(() => {
     let picture = document.querySelector(".picture");
-    console.log(
-      "width:" + picture.clientWidth + " height: " + picture.clientHeight
-    );
 
     let garaaPositionLeft = picture.clientWidth * 0.01;
     setGaraaPosition({
@@ -68,13 +64,15 @@ const App = () => {
     const counterToTime = () => {
       let minute = Math.floor(counter/60);
       let second = counter -(minute *60);
+      if (second <= 9) {
+        second = "0"+second;
+      }
   
       const defTime = minute+":"+second;
       setTime(defTime)
-      console.log(time)
     }
     counterToTime()
-  }, [counter, time]);
+  }, [counter, time,stopTimer]);
 
   
 
@@ -84,7 +82,6 @@ const App = () => {
     setFoundCharacters((foundCharacters) => {
       const newValue = foundCharacters + 1;
       if (newValue === 3) {
-        console.log("Game Over");
         setStopTimer(true);
         setGameOver(true);
       }
@@ -103,6 +100,7 @@ const App = () => {
         top={topPosition}
         bottom={bottomPosition}
         checkAllFound={checkAllFound}
+        stopTimer={stopTimer}
       />
       {gameOver && (
         <GameOver setGameOver={setGameOver} setOpenScores={setOpenScores} time={time}/>
